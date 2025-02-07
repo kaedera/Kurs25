@@ -1,7 +1,7 @@
 package com.example.kursovaya;
 
-import com.example.kursovaya.model.User;
-import com.example.kursovaya.model.ApiService;
+import com.example.kursovaya.api.User;
+import com.example.kursovaya.api.ApiService;
 import com.example.kursovaya.api.RetrofitClient;
 import com.example.kursovaya.api.LoginResponse;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.content.Context;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,11 +29,11 @@ import android.view.View;
 
 public class Autho extends AppCompatActivity {
 
-    private ImageButton backButton;
+    ImageButton backButton;
     private ImageView passwordVisibility;
     private EditText passwordEditText;
     private EditText usernameEditText;
-    private Button loginButton;
+    Button loginButton;
     private ProgressBar progressBar;
     private boolean isPasswordVisible = false;
 
@@ -98,7 +99,7 @@ public class Autho extends AppCompatActivity {
 
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                         progressBar.setVisibility(View.GONE); // Скрываем прогресс-бар
 
                         if (response.isSuccessful() && response.body() != null) {
@@ -116,7 +117,7 @@ public class Autho extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                         progressBar.setVisibility(View.GONE); // Скрываем прогресс-бар
                         if (t instanceof java.net.ConnectException) {
                             Toast.makeText(Autho.this, "Ошибка сети: Не удается подключиться к серверу", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,4 @@
-package com.example.kursovaya.model;
-
-import com.example.kursovaya.api.LoginResponse;
+package com.example.kursovaya.api;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

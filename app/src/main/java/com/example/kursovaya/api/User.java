@@ -1,4 +1,4 @@
-package com.example.kursovaya.model;
+package com.example.kursovaya.api;
 
 public class User {
     private String login;
