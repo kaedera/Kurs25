@@ -8,14 +8,22 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.kursovaya.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Главная страница"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="STUDENT_ID"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.kursovaya.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:label="Личный кабинет"
+        tools:layout="@layout/fragment_dashboard">
+        <argument
+            android:name="STUDENT_ID"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"

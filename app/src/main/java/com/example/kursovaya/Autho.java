@@ -105,7 +105,9 @@ public class Autho extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             LoginResponse loginResponse = response.body();
                             if (loginResponse.getMessage().equals("Авторизация успешна")) {
+                                int studentId = loginResponse.getID_user(); // Получаем ID студента
                                 Intent intent = new Intent(Autho.this, MainScreen.class);
+                                intent.putExtra("STUDENT_ID", studentId); // Передаём ID студента
                                 startActivity(intent);
                                 finish();
                             } else {

@@ -4,7 +4,7 @@
     <string name="back_button_description">Кнопка назад</string>
     <string name="password_visibility">Показать пароль</string>
     <string name="title_activity_main_screen">MainScreen</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Главная страница</string>
+    <string name="title_dashboard">Личный кабинет</string>
+    <string name="title_notifications">Заметки</string>
 </resources>

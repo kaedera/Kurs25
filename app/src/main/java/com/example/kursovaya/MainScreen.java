@@ -22,7 +22,7 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // Проверка наличия ActionBar перед его скрытием
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -31,15 +31,25 @@ public class MainScreen extends AppCompatActivity {
         binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Получаем ID студента из Intent
+        int studentId = getIntent().getIntExtra("STUDENT_ID", -1);
+
+        // Передаём ID студента в DashboardFragment
+        if (studentId != -1) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("STUDENT_ID", studentId);
+
+            // Устанавливаем аргументы для DashboardFragment
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main_screen);
+            navController.setGraph(R.navigation.mobile_navigation, bundle);
+        }
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        // Настройка навигации
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main_screen);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }
