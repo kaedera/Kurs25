@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <!-- Аватар -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/noavatar"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/CustomShapeAppearance"
@@ -19,7 +18,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp" />
 
-    <!-- ФИО -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -33,7 +31,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
 
-    <!-- Дата рождения -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
@@ -45,7 +42,6 @@
         app:layout_constraintEnd_toEndOf="@id/textView"
         android:layout_marginTop="8dp" />
 
-    <!-- Email -->
     <TextView
         android:id="@+id/text_dashboard"
         android:layout_width="0dp"
@@ -57,7 +53,19 @@
         app:layout_constraintEnd_toEndOf="@id/textView2"
         android:layout_marginTop="8dp" />
 
-    <!-- Заголовок списка оценок -->
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#5cc3ff"
+        android:text="Выйти из аккаунта"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_dashboard" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"
@@ -65,14 +73,13 @@
         android:text="Последние полученные оценки:"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imageView2"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
 
-    <!-- Список оценок -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="0dp"
@@ -84,5 +91,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

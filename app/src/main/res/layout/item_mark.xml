@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textViewDiscipline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Дисциплина"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewMarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Оценки"
+        android:textSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/textViewAverage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Средний балл: 0.00"
+        android:textSize="14sp" />
+</LinearLayout>

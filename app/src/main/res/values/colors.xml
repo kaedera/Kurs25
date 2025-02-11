@@ -3,4 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="natk">#0078BF</color>
+    <color name="color_mark_5">#00BFFF</color>
+    <color name="color_mark_4">#32CD32</color>
+    <color name="color_mark_3">#FF8C00</color>
+    <color name="color_mark_2">#FF4500</color>
 </resources>

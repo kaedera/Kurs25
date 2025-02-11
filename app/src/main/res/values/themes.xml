@@ -7,7 +7,7 @@
 
     <style name="CustomShapeAppearance">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50dp</item>
+        <item name="cornerSize">40dp</item>
     </style>
 
     <style name="Theme.Kursovaya" parent="Base.Theme.Kursovaya" />

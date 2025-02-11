@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/textViewDiscipline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Дисциплина"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Дата: 01.01.2023"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewOffice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Кабинет: 360"
+        android:textSize="14sp" />
+</LinearLayout>

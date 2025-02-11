@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.kursovaya.R;
 import com.example.kursovaya.api.ApiService;
@@ -17,9 +19,13 @@ import com.example.kursovaya.api.RetrofitClient;
 import com.example.kursovaya.api.StudentInfoResponse;
 import com.example.kursovaya.api.StudentExamsResponse;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,9 +35,23 @@ public class HomeFragment extends Fragment {
 
     private TextView textViewGreeting, textViewName;
     private ListView listViewExams;
-    private ArrayAdapter<String> examsAdapter;
-    private List<String> examsList;
+    private HomeViewModel homeViewModel;
+    private ExamsAdapter examsAdapter;
+    private List<StudentExamsResponse> examsList;
     private int studentId; // ID студента
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        homeViewModel.getSharedData().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                loadStudentData(integer);
+                loadStudentExams(integer);
+            }
+        });
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,14 +73,8 @@ public class HomeFragment extends Fragment {
 
         // Инициализация списка экзаменов
         examsList = new ArrayList<>();
-        examsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, examsList);
+        examsAdapter = new ExamsAdapter(getContext(), examsList);
         listViewExams.setAdapter(examsAdapter);
-
-        // Загрузка данных студента и экзаменов
-        if (studentId != -1) {
-            loadStudentData(studentId);
-            loadStudentExams(studentId);
-        }
 
         return root;
     }
@@ -90,7 +104,7 @@ public class HomeFragment extends Fragment {
                     StudentInfoResponse studentInfo = response.body();
 
                     // Установка имени студента
-                    textViewName.setText(studentInfo.getFirstName() + " " + studentInfo.getLastName());
+                    textViewName.setText(studentInfo.getFirstName());
                 } else {
                     // Обработка ошибки
                     textViewName.setText("Ошибка загрузки данных");
@@ -118,18 +132,13 @@ public class HomeFragment extends Fragment {
 
                     // Очистка списка экзаменов
                     examsList.clear();
-
-                    // Парсинг и добавление экзаменов в список
-                    for (StudentExamsResponse exam : exams) {
-                        examsList.add(exam.getDiscipline() + ": " + exam.getDate() + " (каб. " + exam.getOffice() + ")");
-                    }
+                    examsList.addAll(exams);
 
                     // Обновление ListView
                     examsAdapter.notifyDataSetChanged();
                 } else {
                     // Обработка ошибки
                     examsList.clear();
-                    examsList.add("Ошибка загрузки экзаменов");
                     examsAdapter.notifyDataSetChanged();
                 }
             }
@@ -138,9 +147,21 @@ public class HomeFragment extends Fragment {
             public void onFailure(@NonNull Call<List<StudentExamsResponse>> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 examsList.clear();
-                examsList.add("Ошибка сети");
                 examsAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    // Метод для форматирования даты
+    private String formatDate(String inputDate) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            Date date = inputFormat.parse(inputDate);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return inputDate; // Возвращаем исходную дату в случае ошибки
+        }
     }
 }

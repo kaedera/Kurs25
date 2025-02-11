@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         authorizationButton.setOnClickListener(view -> {
             // Создаем Intent для перехода на Autho Activity
             Intent intent = new Intent(MainActivity.this, Autho.class);
-
             // Запускаем Autho Activity
             startActivity(intent);
         });

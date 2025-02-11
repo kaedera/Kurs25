@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.kursovaya.ui.dashboard.DashboardViewModel;
+import com.example.kursovaya.ui.home.HomeViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,6 +20,8 @@ import com.example.kursovaya.databinding.ActivityMainScreenBinding;
 public class MainScreen extends AppCompatActivity {
 
     private ActivityMainScreenBinding binding;
+    private HomeViewModel homeViewModel;
+    private DashboardViewModel dashboardViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +35,13 @@ public class MainScreen extends AppCompatActivity {
 
         binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
         // Получаем ID студента из Intent
         int studentId = getIntent().getIntExtra("STUDENT_ID", -1);
-
+        homeViewModel.setSharedData(studentId);
+        dashboardViewModel.setSharedData(studentId);
         // Передаём ID студента в DashboardFragment
         if (studentId != -1) {
             Bundle bundle = new Bundle();
